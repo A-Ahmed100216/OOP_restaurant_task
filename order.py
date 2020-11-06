@@ -28,9 +28,9 @@ class Order(Menu):
 
         # If the order is not in the menu, the customer will be asked to re-input.
         while self.order not in self.items:
-            self.order = input("Uh oh, that is not an item on our menu. Please try again  ")
+            self.order = input("Uh oh, that is not an item on our menu. Please try again  ").capitalize()
 
-        # Otherwise, the item can be added to the order lis
+        # Otherwise, the item can be added to the order list
         else:
             order_list.append(self.order)
             # Confirmation and customer asked if they would like anything else
@@ -38,16 +38,27 @@ class Order(Menu):
             # If reply is no, process ends
             if more.lower() =="n":
                 return "Thank you, your food will be with you shortly."
+            # Otherwise, customer is asked what they would like
             else:
-                 item2=input("What would you like?  ")
-                 order_list.append(item2)
-                 more2=input("You have chosen {} and {}. Anything else? (y/n) ".format(order_list[0],order_list[1]))
-                 if more2.lower() =="n":
-                     return "Thank you, your food will be with you shortly."
+                 item2=input("What would you like?  ").capitalize()
+                 # If the item is not on the menu, customer asked to re-input.
+                 while item2 not in self.items:
+                     return input("Uh oh, that is not an item on our menu. Please try again  ").capitalize()
+                 # Otherwise, the item can be added to the order list.
                  else:
-                     item3=input("What would you like?  ")
-                     order_list.append(item3)
-                     print("You have chosen {}, {}, and {}. Thank you, your food will be with you shortly.".format(order_list[0], order_list[1], order_list[2]))
+                    order_list.append(item2)
+                    # Customer presented with their order and asked if they want anything else.
+                    more2=input("You have chosen {} and {}. Anything else? (y/n) ".format(order_list[0],order_list[1]))
+                    if more2.lower() =="n":
+                         return "Thank you, your food will be with you shortly."
+                    else:
+                        # Process repeated for a third item.
+                         item3=input("What would you like?  ").capitalize()
+                         while item3 not in self.items:
+                             return input("Uh oh, that is not an item on our menu. Please try again  ").capitalize()
+                         else:
+                            order_list.append(item3)
+                            return "You have chosen {}, {}, and {}. Thank you, your food will be with you shortly.".format(order_list[0], order_list[1], order_list[2])
 
 
 
@@ -57,6 +68,3 @@ class Order(Menu):
 
 
 
-test=Order()
-test.menu()
-test.order()
