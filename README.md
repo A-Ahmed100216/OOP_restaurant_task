@@ -1,4 +1,4 @@
-# Task 2 - Restaurant Waiter 
+# Exercise - Restaurant Waiter 
 
 ### Summary
 Make a program that helps a waiter with their menu and orders.
